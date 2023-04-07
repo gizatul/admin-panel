@@ -23,6 +23,12 @@
       "name": "Ураган",
       "description": "Поднимать тяжести",
       "element": "wind"
+    },
+    {
+      "id": "bc399c84-6ce2-4807-b3c9-ac23cfbf64a8",
+      "name": "Флеш",
+      "description": "Бегать быстро",
+      "element": "wind"
     }
   ],
   "filters": [

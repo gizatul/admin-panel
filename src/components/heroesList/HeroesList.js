@@ -5,9 +5,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { heroesFetching, heroesFetched, heroesFetchingError, deleteItem } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
+import { createSelector } from 'reselect';
 
 const HeroesList = () => {
-    const {filteredHeroes, heroesLoadingStatus} = useSelector(state => state);
+
+    const filteredHeroesSelector = createSelector( //функция-селектор
+        (state) => state.filters.activeFilter,
+        (state) => state.heroes.heroes,
+        (filter, heroes) => {
+            if (filter === 'all') {
+                console.log('render');
+                return heroes;
+            } else {
+                return heroes.filter(item => item.element === filter)
+            }
+        }
+    );
+
+    const filteredHeroes = useSelector(filteredHeroesSelector);
+    const {heroesLoadingStatus} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
