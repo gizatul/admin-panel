@@ -1,19 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addHero } from "../../actions";
 import { v4 as uuidv4 } from 'uuid';
 import {useHttp} from '../../hooks/http.hook';
-
-// Задача для этого компонента:
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
-
 
 const HeroesAddForm = () => {
     
@@ -22,7 +11,7 @@ const HeroesAddForm = () => {
     const [heroElem, setHeroElem] = useState('');
 
     const dispatch = useDispatch();
-
+    const {filters} = useSelector(state => state);
     const {request} = useHttp();
 
     const onSubmit = (e) => {
@@ -34,14 +23,23 @@ const HeroesAddForm = () => {
             element: heroElem,
         }
         request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
-            .then(dispatch(addHero(newHero)));
-
-        //Clear form after post
-        setHeroName('');
-        setHeroDescr('');
-        setHeroElem('');
+            .then(dispatch(addHero(newHero)))
+            .catch(err => console.err(err))
+            .finally(() => {
+                setHeroName('');
+                setHeroDescr('');
+                setHeroElem('');
+            })
     }
 
+    const renderFilters = (filters) => {
+        if (filters && filters.length > 0) {
+            return filters.map(({name, label}) => {
+                if (name === 'all') return;
+                return <option key={name} value={name}>{label}</option>
+            })
+        }
+    }
 
     return (
         <form className="border p-4 shadow-lg rounded"
@@ -82,10 +80,7 @@ const HeroesAddForm = () => {
                     name="element"
                     onChange={(e) => setHeroElem(e.target.value)}>
                     <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    {renderFilters(filters)}
                 </select>
             </div>
             <button type="submit" className="btn btn-primary">Создать</button>
