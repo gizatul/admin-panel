@@ -22,7 +22,7 @@ const HeroesAddForm = () => {
             description: heroDescr,
             element: heroElem,
         }
-        request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
+        request('https://admin-panel-tr9g.vercel.app//heroes', 'POST', JSON.stringify(newHero))
             .then(dispatch(addHero(newHero)))
             .catch(err => console.err(err))
             .finally(() => {

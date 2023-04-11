@@ -33,7 +33,7 @@ const HeroesList = () => {
     }, []);
 
     const onDeleteItem = useCallback((id) => {
-        request(`http://localhost:3001/heroes/${id}`, 'DELETE')
+        request(`https://admin-panel-tr9g.vercel.app/heroes/${id}`, 'DELETE')
             .then(dispatch(deleteItem(id)))
             .catch(err => console.err(err)) // eslint-disable-next-line
     }, [])

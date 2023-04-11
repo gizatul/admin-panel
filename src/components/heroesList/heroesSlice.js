@@ -11,7 +11,7 @@ export const fetchHeroes = createAsyncThunk(
     'heroes/fetchHeroes',
     () => {
         const {request} = useHttp();
-        return request("http://localhost:3001/heroes")
+        return request("https://admin-panel-tr9g.vercel.app/heroes")
     }
 )
 
