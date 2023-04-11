@@ -9,7 +9,7 @@ import { createSelector } from 'reselect';
 
 const HeroesList = () => {
 
-    const filteredHeroesSelector = createSelector( //функция-селектор
+    const filteredHeroesSelector = createSelector(
         (state) => state.filters.activeFilter,
         (state) => state.heroes.heroes,
         (filter, heroes) => {

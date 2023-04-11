@@ -23,6 +23,12 @@
       "name": "Мистер Water",
       "description": "Плавать",
       "element": "water"
+    },
+    {
+      "id": "34bc6f08-18a9-461b-ac34-48269c3e2dd0",
+      "name": "Дух мертвеца",
+      "description": "Проходить сквозь стены",
+      "element": "fire"
     }
   ],
   "filters": [

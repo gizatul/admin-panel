@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const fetchHeroes = createAsyncThunk(
-    'heroes/fetchHeroes', //'heroes' название среза к которому относится функция (ниже в heroesSlice)
+    'heroes/fetchHeroes',
     () => {
         const {request} = useHttp();
         return request("http://localhost:3001/heroes")
@@ -18,7 +18,7 @@ export const fetchHeroes = createAsyncThunk(
 const heroesSlice = createSlice({
     name: 'heroes',
     initialState,
-    reducers: { //генерирум action-креаторы и действия, кот-е подвязываются под эти экшн-креаторы
+    reducers: { 
         addHero: (state, action) => {
             state.heroes.push(action.payload);
         },
@@ -26,7 +26,7 @@ const heroesSlice = createSlice({
             state.heroes = state.heroes.filter(item => item.id !== action.payload);
         },
     },
-    extraReducers: (builder) => { //Ф-я отвечающая за загрузку данных
+    extraReducers: (builder) => {
         builder
             .addCase(fetchHeroes.pending, state => {
                 state.heroesLoadingStatus = 'loading';
@@ -42,9 +42,9 @@ const heroesSlice = createSlice({
     }
 });
 
-const {actions, reducer} = heroesSlice; //вытаскиваем 
+const {actions, reducer} = heroesSlice;
 
-export default reducer; //экспортируем reducer, для использования его
+export default reducer; 
 
 export const {
     heroesFetching,
