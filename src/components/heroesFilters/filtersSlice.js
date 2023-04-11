@@ -11,7 +11,7 @@ export const fetchFilters = createAsyncThunk(
     'filters/fetchFilters',
     () => {
         const {request} = useHttp();
-        return request('https://admin-panel-tr9g.vercel.app//filters')
+        return request('https://admin-panel-tr9g.vercel.app/filters')
     }
 )
 
