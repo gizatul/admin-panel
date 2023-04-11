@@ -24,7 +24,7 @@ const HeroesAddForm = () => {
         }
         request('https://admin-panel-tr9g.vercel.app/heroes', 'POST', JSON.stringify(newHero))
             .then(dispatch(addHero(newHero)))
-            .catch(err => console.err(err))
+            .catch(err => console.error(err))
             .finally(() => {
                 setHeroName('');
                 setHeroDescr('');
