@@ -34,7 +34,7 @@ const HeroesList = () => {
     const onDeleteItem = useCallback((id) => {
         request(`https://admin-panel-tr9g.vercel.app/heroes/${id}`, 'DELETE')
             .then(dispatch(deleteItem(id)))
-            .catch(err => console.err(err)) // eslint-disable-next-line
+            .catch(err => console.error(err)) // eslint-disable-next-line
     }, [])
 
     if (heroesLoadingStatus === "loading") {
